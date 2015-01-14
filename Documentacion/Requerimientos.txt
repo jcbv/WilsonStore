@@ -1,0 +1,6 @@
+Grafico de barras
+Asignar modulos por usuario
+Dividir proyecto en arquitectura cliente servidor
+Reportes para gerencia
+Elejir donde guardar archivos exportados
+Imprimir factura

@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>pe.jcbv</groupId>
+    <artifactId>WilsonStore</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+
+    <name>WilsonStore</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.test.skip>true</maven.test.skip>
+        <ojdbc6.version>11.2.0.4</ojdbc6.version>
+        <DatePicker.version>V0.99-2006.09.01</DatePicker.version>
+    </properties>
+    
+    <modules>
+        <module>WilsonStoreCliente</module>
+        <module>WilsonStoreServidor</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.5</version>
+                </plugin>            
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>                
+                <plugin>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>2.9</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <artifactId>maven-install-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>install-ojdbc6</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <inherited>false</inherited>
+                        <configuration>
+                            <groupId>oracle</groupId>
+                            <artifactId>ojdbc6</artifactId>
+                            <version>${ojdbc6.version}</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/lib/ojdbc6.jar</file>
+                        </configuration>                    
+                    </execution>
+                    <execution>
+                        <id>install-DatePicker</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <inherited>false</inherited>
+                        <configuration>
+                            <groupId>com.qt</groupId>
+                            <artifactId>DatePicker</artifactId>
+                            <version>${DatePicker.version}</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/lib/DatePicker-V0.99-2006.09.01.jar</file>
+                        </configuration>                    
+                    </execution>
+                </executions>
+            </plugin>   
+        </plugins>
+    </build>
+</project>
