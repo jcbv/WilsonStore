@@ -49,7 +49,7 @@ public class DaoProcesosImpl implements DaoProcesos
 			
 			sql = "INSERT INTO venta ( ven_id, ven_fecha, ven_subtotal, " +
 				  "ven_impuesto, ven_total, emp_id, cli_id ) " +
-				  "VALUES ( ?,SYSDATE,?,?,?,?,? )";
+				  "VALUES ( ?,CURRENT_TIMESTAMP,?,?,?,?,? )";
 			
 			PreparedStatement pstm = conexion.prepareStatement( sql );
 			pstm.setString( 1, codigo );

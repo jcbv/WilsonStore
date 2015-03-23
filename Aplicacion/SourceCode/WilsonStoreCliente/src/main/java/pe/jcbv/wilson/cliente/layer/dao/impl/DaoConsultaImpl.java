@@ -29,7 +29,7 @@ public class DaoConsultaImpl implements DaoConsulta
 						 "FROM detalle d " +
 						 "JOIN venta v ON v.ven_id = d.ven_id " +
 						 "JOIN articulo a ON a.art_id = d.art_id " +
-						 "WHERE v.ven_fecha > ? AND v.ven_fecha < ? " +
+						 "WHERE v.ven_fecha > cast(? as date) AND v.ven_fecha < cast(? as date) " +
 						 "GROUP BY a.art_id, a.art_nombre, a.art_pventa " +
 						 "ORDER BY 1";
 			
@@ -81,7 +81,7 @@ public class DaoConsultaImpl implements DaoConsulta
 						 "JOIN categoria c ON c.cat_id = a.cat_id " +
 						 "JOIN detalle d ON d.art_id = a.art_id " +
 						 "JOIN venta v ON v.ven_id = d.ven_id " +
-						 "WHERE v.ven_fecha > ? AND v.ven_fecha < ? " +
+						 "WHERE v.ven_fecha > cast(? as date) AND v.ven_fecha < cast(? as date) " +
 						 "GROUP BY c.cat_nombre";
 			
 			PreparedStatement pstm = conexion.prepareStatement( sql );

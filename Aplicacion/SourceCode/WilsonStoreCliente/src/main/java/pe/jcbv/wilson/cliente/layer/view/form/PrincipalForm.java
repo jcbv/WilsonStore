@@ -70,11 +70,11 @@ public class PrincipalForm
 		frmWilsonStore.getContentPane().setLayout( null );
 		
 		JPanel panel = new JPanel();
-		panel.setBounds( 0, 0, 116, 239 );
+		panel.setBounds( 0, 0, 250, 239 );
 		frmWilsonStore.getContentPane().add( panel );
 		panel.setLayout( new GridLayout( 0, 1, 0, 0 ) );
 		
-		JButton btnProceso = new JButton( "Proceso" );
+		JButton btnProceso = new JButton( "Registro" );
 		btnProceso.addActionListener( new ActionListener() {
 			public void actionPerformed( ActionEvent  e)
 			{
@@ -86,7 +86,7 @@ public class PrincipalForm
 		btnProceso.setBorder( new SoftBevelBorder( BevelBorder.RAISED, null, null, null, null ) );
 		panel.add( btnProceso );
 		
-		JButton btnTablas = new JButton( "Tablas" );
+		JButton btnTablas = new JButton( "Mantenimiento" );
 		btnTablas.addActionListener( new ActionListener() {
 			public void actionPerformed( ActionEvent arg0 )
 			{

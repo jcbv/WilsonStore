@@ -24,14 +24,14 @@ public class AccesoDB
 		{
 			//Properties p = new ArchivoPropiedades().getProperties();
 			
-//			String driver = "org.postgresql.Driver";
-//			String url = "jdbc:postgresql://localhost:5433/wilsonstore";
-//			String user = "postgres";
-//			String pass = "postgres";
-			String driver = "oracle.jdbc.OracleDriver";
-			String url = "jdbc:oracle:thin:@localhost:1521:XE";
-			String user = "wilsonstore";
-			String pass = "admin";
+			String driver = "org.postgresql.Driver";
+			String url = "jdbc:postgresql://localhost:5433/wilsonstore";
+			String user = "postgres";
+			String pass = "postgres";
+//			String driver = "oracle.jdbc.OracleDriver";
+//			String url = "jdbc:oracle:thin:@localhost:1521:XE";
+//			String user = "wilsonstore";
+//			String pass = "admin";
 			//String url = "jdbc:oracle:thin:@" + p.getProperty("ip") +":1521:XE";
 			//String user = p.getProperty("database");
 			//String pass = p.getProperty("password");
