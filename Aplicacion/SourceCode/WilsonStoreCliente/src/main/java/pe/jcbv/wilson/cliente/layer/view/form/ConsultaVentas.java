@@ -431,7 +431,7 @@ public class ConsultaVentas extends JDialog
 			lista.add( a );
 		}
 		
-		controller.exportarCSVArt( lista, "articulo.csv" );
+		controller.exportarCSVArt( lista, "D:/articulo.csv" );
 		MessageWin.showInfo( "ARCHIVO CSV CREADO" );
 	}
 	
@@ -451,7 +451,7 @@ public class ConsultaVentas extends JDialog
 			lista.add( c );
 		}
 		
-		controller.exportarCSVCat( lista, "categoria.csv" );
+		controller.exportarCSVCat( lista, "D:/categoria.csv" );
 		MessageWin.showInfo( "ARCHIVO CSV CREADO" );
 	}
 	
@@ -476,7 +476,7 @@ public class ConsultaVentas extends JDialog
 			lista.add( a );
 		}
 		
-		controller.exportarXLSArt( lista, "articulo.xls" );
+		controller.exportarXLSArt( lista, "D:/articulo.xls" );
 		MessageWin.showInfo( "ARCHIVO XLS CREADO" );
 	}
 	
@@ -496,7 +496,7 @@ public class ConsultaVentas extends JDialog
 			lista.add( c );
 		}
 		
-		controller.exportarXLSCat( lista, "categoria.xls" );
+		controller.exportarXLSCat( lista, "D:/categoria.xls" );
 		MessageWin.showInfo( "ARCHIVO XLS CREADO" );
 	}
 	
