@@ -20,7 +20,6 @@
     
     <modules>
         <module>WilsonStoreCliente</module>
-        <module>WilsonStoreServidor</module>
     </modules>
 
     <build>
