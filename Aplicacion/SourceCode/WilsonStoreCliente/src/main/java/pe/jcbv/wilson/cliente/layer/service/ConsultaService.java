@@ -1,5 +1,6 @@
 package pe.jcbv.wilson.cliente.layer.service;
 
+import java.util.Date;
 import java.util.List;
 import pe.jcbv.wilson.cliente.domain.ConsultaPorArticulo;
 import pe.jcbv.wilson.cliente.domain.ConsultaPorCategoria;
@@ -15,12 +16,12 @@ public class ConsultaService
 		daoConsulta = new DaoConsultaImpl();
 	}
 	
-	public List< ConsultaPorArticulo > consultarPorArticulo( String fechaInicio, String fechaFinal )
+	public List< ConsultaPorArticulo > consultarPorArticulo( Date fechaInicio, Date fechaFinal )
 	{
 		return daoConsulta.consultarPorArticulo(fechaInicio, fechaFinal);
 	}
 	
-	public List< ConsultaPorCategoria > consultarPorCategoria( String fechaInicio, String fechaFinal )
+	public List< ConsultaPorCategoria > consultarPorCategoria( Date fechaInicio, Date fechaFinal )
 	{
 		return daoConsulta.consultarPorCategoria( fechaInicio, fechaFinal );
 	}

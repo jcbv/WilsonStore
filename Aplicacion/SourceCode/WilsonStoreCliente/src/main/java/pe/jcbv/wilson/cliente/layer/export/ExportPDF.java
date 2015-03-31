@@ -8,6 +8,7 @@ package pe.jcbv.wilson.cliente.layer.export;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JROrigin;
@@ -16,6 +17,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JRDesignBand;
 import net.sf.jasperreports.engine.design.JRDesignExpression;
 import net.sf.jasperreports.engine.design.JRDesignField;
@@ -37,6 +39,11 @@ import net.sf.jasperreports.engine.type.ModeEnum;
 import net.sf.jasperreports.engine.type.PositionTypeEnum;
 import net.sf.jasperreports.engine.type.ResetTypeEnum;
 import net.sf.jasperreports.engine.xml.JasperDesignFactory;
+import pe.jcbv.wilson.cliente.domain.Articulo;
+import pe.jcbv.wilson.cliente.domain.Cliente;
+import pe.jcbv.wilson.cliente.domain.Venta;
+import pe.jcbv.wilson.cliente.layer.service.ProcesosService;
+import pe.jcbv.wilson.cliente.layer.view.form.Procesos;
 
 /**
  *
@@ -87,69 +94,59 @@ public class ExportPDF {
         italicStyle.setPdfEncoding("Cp1252");
         italicStyle.setPdfEmbedded(false);
         jasperDesign.addStyle(italicStyle);
-//Parameters
-    JRDesignParameter parameter = new JRDesignParameter();
-    parameter.setName("apaterno");
-    parameter.setValueClass(java.lang.String.class);
-    jasperDesign.addParameter(parameter);
+        
+        //Parameters
+        JRDesignParameter parameter = new JRDesignParameter();
+        parameter.setName("apaterno");
+        parameter.setValueClass(java.lang.String.class);
+        jasperDesign.addParameter(parameter);
 
-    parameter = new JRDesignParameter();
-    parameter.setName("amaterno");
-    parameter.setValueClass(java.lang.String.class);
-    jasperDesign.addParameter(parameter);
-    
-    parameter = new JRDesignParameter();
-    parameter.setName("nombre");
-    parameter.setValueClass(java.lang.String.class);
-    jasperDesign.addParameter(parameter);
-    
-    parameter = new JRDesignParameter();
-    parameter.setName("fecha");
-    parameter.setValueClass(java.lang.String.class);
-    jasperDesign.addParameter(parameter);
-    parameter = new JRDesignParameter();
-    parameter.setName("subtotal");
-    parameter.setValueClass(java.lang.String.class);
-    jasperDesign.addParameter(parameter);
-    parameter = new JRDesignParameter();
-    parameter.setName("igv");
-    parameter.setValueClass(java.lang.String.class);
-    jasperDesign.addParameter(parameter);
-    parameter = new JRDesignParameter();
-    parameter.setName("total");
-    parameter.setValueClass(java.lang.String.class);
-    jasperDesign.addParameter(parameter);
+        parameter = new JRDesignParameter();
+        parameter.setName("amaterno");
+        parameter.setValueClass(java.lang.String.class);
+        jasperDesign.addParameter(parameter);
+
+        parameter = new JRDesignParameter();
+        parameter.setName("nombre");
+        parameter.setValueClass(java.lang.String.class);
+        jasperDesign.addParameter(parameter);
+
+        parameter = new JRDesignParameter();
+        parameter.setName("fecha");
+        parameter.setValueClass(java.lang.String.class);
+        jasperDesign.addParameter(parameter);
+        parameter = new JRDesignParameter();
+        parameter.setName("subtotal");
+        parameter.setValueClass(java.lang.Double.class);
+        jasperDesign.addParameter(parameter);
+        parameter = new JRDesignParameter();
+        parameter.setName("igv");
+        parameter.setValueClass(java.lang.Double.class);
+        jasperDesign.addParameter(parameter);
+        parameter = new JRDesignParameter();
+        parameter.setName("total");
+        parameter.setValueClass(java.lang.Double.class);
+        jasperDesign.addParameter(parameter);
         //Fields
         JRDesignField field = new JRDesignField();
-        field.setName("codigo");
+        field.setName("art_id");
+        field.setValueClass(java.lang.String.class);
+        jasperDesign.addField(field);
+
+        field = new JRDesignField();
+        field.setName("articulo");
+        field.setValueClass(Articulo.class);
+        jasperDesign.addField(field);
+
+        field = new JRDesignField();
+        field.setName("det_cant");
         field.setValueClass(java.lang.Integer.class);
         jasperDesign.addField(field);
 
         field = new JRDesignField();
-        field.setName("nombre");
-        field.setValueClass(java.lang.String.class);
+        field.setName("det_precio");
+        field.setValueClass(java.lang.Double.class);
         jasperDesign.addField(field);
-
-        field = new JRDesignField();
-        field.setName("descripcion");
-        field.setValueClass(java.lang.String.class);
-        jasperDesign.addField(field);
-
-        field = new JRDesignField();
-        field.setName("cant");
-        field.setValueClass(java.lang.String.class);
-        jasperDesign.addField(field);
-
-        field = new JRDesignField();
-        field.setName("punit");
-        field.setValueClass(java.lang.String.class);
-        jasperDesign.addField(field);
-
-        field = new JRDesignField();
-        field.setName("importe");
-        field.setValueClass(java.lang.String.class);
-        jasperDesign.addField(field);
-
 
         //Title
         JRDesignBand band = new JRDesignBand();
@@ -303,7 +300,7 @@ public class ExportPDF {
         textField.setStyle(normalStyle);
         expression = new JRDesignExpression();
         expression.setValueClass(java.lang.Integer.class);
-        expression.setText("$F{codigo}");
+        expression.setText("$F{art_id}");
         textField.setExpression(expression);
         band.addElement(textField);
         textField = new JRDesignTextField();
@@ -316,7 +313,7 @@ public class ExportPDF {
         textField.setStyle(normalStyle);
         expression = new JRDesignExpression();
         expression.setValueClass(java.lang.String.class);
-        expression.setText("$F{nombre}");
+        expression.setText("$F{articulo}.getArt_nombre()");
         textField.setExpression(expression);
         band.addElement(textField);
         textField = new JRDesignTextField();
@@ -328,7 +325,8 @@ public class ExportPDF {
         textField.setStyle(normalStyle);
         expression = new JRDesignExpression();
         expression.setValueClass(java.lang.String.class);
-        expression.setText("$F{cant}");
+        expression.setText("$F{det_cant}");
+        textField.setExpression(expression);
         band.addElement(textField);
         textField = new JRDesignTextField();
         textField.setX(350);
@@ -339,7 +337,7 @@ public class ExportPDF {
         textField.setStyle(normalStyle);
         expression = new JRDesignExpression();
         expression.setValueClass(java.lang.String.class);
-        expression.setText("$F{punit}");
+        expression.setText("$F{articulo}.getArt_pventa()");
         textField.setExpression(expression);
         band.addElement(textField);
         textField = new JRDesignTextField();
@@ -351,7 +349,7 @@ public class ExportPDF {
         textField.setStyle(normalStyle);
         expression = new JRDesignExpression();
         expression.setValueClass(java.lang.String.class);
-        expression.setText("$F{importe}");
+        expression.setText("$F{det_precio}");
         textField.setExpression(expression);
         band.addElement(textField);
         line = new JRDesignLine();
@@ -453,29 +451,22 @@ public class ExportPDF {
         return jasperDesign;
     }
 
-    public void export(String venta) throws JRException {
+    public void print(Venta venta, Cliente cliente) throws JRException {
         long start = System.currentTimeMillis();
-        JasperDesign jasperDesign = getJasperDesign(venta);
+        JasperDesign jasperDesign = getJasperDesign(venta.getVen_id());
 //        JasperCompileManager.compileReportToFile(jasperDesign, "NoXmlDesignReport.jasper");
         System.err.println("Compile time : " + (System.currentTimeMillis() - start));
         JasperReport compileReport = JasperCompileManager.compileReport(jasperDesign);
-//        
-//        Map);
-//        parameter.setValueClass(java.lang.String.class);
-//        jasperDesign.addParameter(parameter);
-//
-//        parameter = new JRDesignParameter();
-//        parameter.setName("OrderByClause");
         Map<String, Object> params = new HashMap<>();
-        params.put("ReportTitle", "Mi Reporte programado");
-        params.put("OrderByClause", "");
-        
-        JasperPrint fillReport = JasperFillManager.fillReport(compileReport, params, new JREmptyDataSource(6));
+        params.put("apaterno", cliente.getCli_paterno());
+        params.put("amaterno", cliente.getCli_materno());
+        params.put("nombre", cliente.getCli_nombre());
+        params.put("fecha", venta.getFecha());
+        params.put("subtotal",venta.getVen_subtotal());
+        params.put("igv", venta.getVen_impuesto());
+        params.put("total", venta.getVen_total());
+
+        JasperPrint fillReport = JasperFillManager.fillReport(compileReport, params, new JRBeanCollectionDataSource(venta.getDetalle()));
         JasperPrintManager.printReport(fillReport, Boolean.FALSE);
-    }
-    
-    public static void main(String[] args) throws JRException {
-        new ExportPDF().export("8989");
-        
     }
 }

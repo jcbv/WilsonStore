@@ -1,5 +1,6 @@
 package pe.jcbv.wilson.cliente.layer.controller;
 
+import java.util.Date;
 import java.util.List;
 import pe.jcbv.wilson.cliente.domain.ConsultaPorArticulo;
 import pe.jcbv.wilson.cliente.domain.ConsultaPorCategoria;
@@ -14,13 +15,14 @@ public class ConsultaController
 		consultaService = new ConsultaService();
 	}
 	
-	public List< ConsultaPorArticulo > consultarPorArticulo( String fechaInicio, String fechaFinal )
+	public List< ConsultaPorArticulo > consultarPorArticulo( Date fechaI, Date fechaF)
 	{
-		return consultaService.consultarPorArticulo( fechaInicio, fechaFinal );
+		return consultaService.consultarPorArticulo( fechaI, fechaF );
 	}
 	
-	public List< ConsultaPorCategoria > consultarPorCategoria( String fechaInicio, String fechaFinal )
+	public List< ConsultaPorCategoria > consultarPorCategoria( Date fechaI, Date fechaF )
 	{
-		return consultaService.consultarPorCategoria( fechaInicio, fechaFinal );
+		return consultaService.consultarPorCategoria( fechaI, fechaF );
 	}
+
 }

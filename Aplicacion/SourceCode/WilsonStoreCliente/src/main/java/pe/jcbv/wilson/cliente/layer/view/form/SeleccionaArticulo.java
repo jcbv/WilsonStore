@@ -96,7 +96,7 @@ public class SeleccionaArticulo extends JDialog
 		getContentPane().add( txtNombreArt );
 		txtNombreArt.setColumns( 10 );
 		
-		txtCantidadArt = new JTextField();
+		txtCantidadArt = new JTextField("1");
 		txtCantidadArt.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtCantidadArt.setColumns( 10 );
 		txtCantidadArt.setBounds( 246, 100, 86, 23 );

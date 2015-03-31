@@ -10,6 +10,7 @@ public class Venta
 	private double ven_impuesto;
 	private double ven_total;
 	private String emp_id;
+	private String fecha;
 	private String cli_id;
 	private List< Detalle > detalle;
 	
@@ -28,6 +29,14 @@ public class Venta
 	{
 		this.ven_subtotal = ven_subtotal;
 	}
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
 	
 	public void setVen_subtotal()
 	{

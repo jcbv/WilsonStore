@@ -114,6 +114,12 @@ public class PrincipalForm
 		btnReporte.setIcon( new ImageIcon( PrincipalForm.class.getResource( "/pe/jcbv/wilson/cliente/layer/view/img/reporte.png" ) ) );
 		btnReporte.setFont( new Font("Tahoma", Font.PLAIN, 13 ) );
 		btnReporte.setBorder( new SoftBevelBorder( BevelBorder.RAISED, null, null, null, null ) );
+                btnReporte.addActionListener( new ActionListener() {
+			public void actionPerformed( ActionEvent e )
+			{
+				new Reportes().setVisible(true);
+			}
+		});
 		panel.add( btnReporte );
 		
 		JButton btnSalir = new JButton( "Salir" );

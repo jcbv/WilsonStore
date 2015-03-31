@@ -136,7 +136,7 @@ public class DaoProcesosImpl implements DaoProcesos
 			{
 				
 			}
-			throw new RuntimeException( "Error en el proceso de grabar venta." );
+			throw new RuntimeException( "Error en el proceso de grabar venta.",e );
 		}
 		finally
 		{

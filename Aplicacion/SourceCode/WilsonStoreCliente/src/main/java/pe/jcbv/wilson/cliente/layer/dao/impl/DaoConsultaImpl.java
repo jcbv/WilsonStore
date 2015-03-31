@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import pe.jcbv.wilson.cliente.domain.ConsultaPorArticulo;
@@ -16,7 +17,7 @@ public class DaoConsultaImpl implements DaoConsulta
 
 	@Override
 	public List< ConsultaPorArticulo > consultarPorArticulo(
-			String fechaInicio,	String fechaFinal )
+			Date fechaInicio,	Date fechaFinal )
 	{
 		List< ConsultaPorArticulo > lista = new ArrayList< ConsultaPorArticulo >();
 		Connection conexion = null;
@@ -34,8 +35,8 @@ public class DaoConsultaImpl implements DaoConsulta
 						 "ORDER BY 1";
 			
 			PreparedStatement pstm = conexion.prepareStatement( sql );
-			pstm.setString( 1, fechaInicio );
-			pstm.setString( 2, fechaFinal );
+			pstm.setDate(1, (new java.sql.Date(fechaInicio.getTime())) );
+			pstm.setDate(2, (new java.sql.Date(fechaFinal.getTime())) );
 			ResultSet rs = pstm.executeQuery();
 			
 			while( rs.next() )
@@ -67,7 +68,7 @@ public class DaoConsultaImpl implements DaoConsulta
 
 	@Override
 	public List< ConsultaPorCategoria > consultarPorCategoria(
-			String fechaInicio, String fechaFinal )
+			Date fechaInicio, Date fechaFinal )
 	{
 		List< ConsultaPorCategoria > lista = new ArrayList< ConsultaPorCategoria >();
 		Connection conexion = null;
@@ -85,8 +86,8 @@ public class DaoConsultaImpl implements DaoConsulta
 						 "GROUP BY c.cat_nombre";
 			
 			PreparedStatement pstm = conexion.prepareStatement( sql );
-			pstm.setString( 1, fechaInicio );
-			pstm.setString( 2, fechaFinal );
+			pstm.setDate(1, (new java.sql.Date(fechaInicio.getTime())) );
+			pstm.setDate(2, (new java.sql.Date(fechaFinal.getTime())) );
 			ResultSet rs = pstm.executeQuery();
 			
 			while( rs.next() )
@@ -151,8 +152,8 @@ public class DaoConsultaImpl implements DaoConsulta
 		List< ConsultaPorArticulo > art = new ArrayList< ConsultaPorArticulo >();
 		List< ConsultaPorCategoria > cat = new ArrayList< ConsultaPorCategoria >();
 		
-		art = c.consultarPorArticulo( fi, ff );
-		cat = c.consultarPorCategoria( fi, ff );
+//		art = c.consultarPorArticulo( fi, ff );
+//		cat = c.consultarPorCategoria( fi, ff );
 		
 		System.out.printf( "%10s%60s%10s%12s%12s\n",
 				  "CODIGO", "NOMBRE", "CANT.", "P.UNIT", "IMPORTE" );
